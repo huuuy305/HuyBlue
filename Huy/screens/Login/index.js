@@ -6,8 +6,8 @@ function Login({ navigation }) {
             <View style={styles.waper}>
     <View style={styles.logowaper}>
         <Image
-              source={require('../imgs/Huy.png')}
-              style={styles.image}
+         source={require('../Login/imgs/Huy.png')}
+           style={styles.image}
             ></Image>
  </View>
             <View style={styles.login}>
