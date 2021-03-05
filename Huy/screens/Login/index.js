@@ -1,29 +1,53 @@
-import React from 'react';
-import { StyleSheet, Text, View, TextInput, Image, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import {View,Text,StyleSheet,TextInput,Image,TouchableOpacity,TouchableWithoutFeedback,Keyboard,Alert } from 'react-native';
+import Users from '../../services/Users';
 
 function Login({ navigation }) {
-        return (
+	const [username, setUsername] = useState('');
+	const [password, setPassword] = useState('');
+
+	const dangnhap = () => {
+		if(username.trim() === '') {
+			return Alert.alert('Tài khoản không được để trống');
+		}
+
+		if(password.trim() === '') {
+			return Alert.alert('Mật khẩu không được để trống');
+		}
+
+		if(username !== Users.username || password !== Users.password) {
+			return Alert.alert('Tài khoản hoặc mật khẩu không chính xác');
+		}
+
+		navigation.navigate('Menu');
+	}
+
+
+	return (
+        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
             <View style={styles.waper}>
     <View style={styles.logowaper}>
         <Image
-         source={require('../Login/imgs/Huy.png')}
-           style={styles.image}
+              source={require('../Login/imgs/Huy.png')}
+              style={styles.image}
             ></Image>
  </View>
             <View style={styles.login}>
             <TextInput
-     style={[styles.input
-        , styles.username]}
-    placeholder='Username'
+            style={[styles.input, styles.username]}
+                 placeholder='Username'
+           onChangeText={(text) => setUsername(text)}
   ></TextInput>
   <TextInput 
-            style={styles.input} placeholder='Password'
-            secureTextEntry
+           style={styles.input}
+               placeholder='Password'
+     secureTextEntry
+           onChangeText={(text) => setPassword(text)}
         ></TextInput>
 
         <TouchableOpacity 
             style={styles.btnLogin}
-    onPress={() => navigation.navigate('Menu')}
+            onPress={dangnhap} 
         >
             <Text style={styles.textLogin}>Đăng Nhập</Text>
                   </TouchableOpacity>  
@@ -31,7 +55,7 @@ function Login({ navigation }) {
          <TextInput style={styles.qmk}>Quên Mật Khẩu ?</TextInput>
            <TextInput style={styles.dangky}>Đăng Ký !</TextInput>
         </View>
-
+        </TouchableWithoutFeedback>
 );
      }
 
