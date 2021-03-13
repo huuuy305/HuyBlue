@@ -14,7 +14,9 @@ function moneyFormat(price, sign = 'VND') {
 
 function ItemList({ data }) {
 	return (
-		<TouchableOpacity onPress={() => Alert.alert('HIHI')}>
+		<TouchableOpacity onPress={() => navigation.navigate('MenuDetail', {
+			idMenu: data.id
+		})}>
 			<View style={styles.container}>
 				<View style={styles.containerImage}>
 					<Image
